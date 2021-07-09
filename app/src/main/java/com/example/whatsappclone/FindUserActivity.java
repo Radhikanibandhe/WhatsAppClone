@@ -77,7 +77,16 @@ public class FindUserActivity extends AppCompatActivity {
                     String phone = "",
                             name = "";
                     for (DataSnapshot childSnapshot: snapshot.getChildren()){
-
+                        if (childSnapshot.child("phone").getValue() != null){
+                            phone = childSnapshot.child("phone").getValue().toString();
+                        }
+                        if (childSnapshot.child("name").getValue() != null){
+                            name = childSnapshot.child("name").getValue().toString();
+                        }
+                        UserObject mUser = new UserObject(name,phone);
+                        userList.add(mUser);
+                        mUserListAdapter.notifyDataSetChanged();
+                        return;
                     }
                 }
             }
